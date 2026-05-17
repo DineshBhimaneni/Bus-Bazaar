@@ -1,0 +1,110 @@
+.booking-summary-page {
+  padding: 40px 20px;
+}
+
+.page-title {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.summary-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.passenger-section {
+  flex: 2;
+}
+
+.passenger-section h3 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.passenger-form .form-group {
+  margin-bottom: 20px;
+}
+
+.passenger-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+}
+
+.passenger-form input,
+.passenger-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.fare-section {
+  flex: 1;
+  position: sticky;
+  top: 90px;
+}
+
+.fare-section h3 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.trip-info {
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.trip-info h4 {
+  color: #1a56db;
+  margin-bottom: 5px;
+}
+
+.fare-breakdown .breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.fare-breakdown .total {
+  border-top: 2px dashed #eee;
+  padding-top: 15px;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+  .summary-layout {
+    flex-direction: column;
+  }
+  
+  .fare-section {
+    width: 100%;
+    position: static;
+    order: -1; /* Show fare on top on mobile */
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}

@@ -1,0 +1,134 @@
+.search-section {
+  background: linear-gradient(rgba(26, 86, 219, 0.8), rgba(26, 86, 219, 0.8)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.search-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.search-form {
+  display: flex;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.input-group label {
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.input-group select,
+.input-group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group select:focus,
+.input-group input:focus {
+  border-color: #1a56db;
+}
+
+.icon-group {
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.swap-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #f0f4ff;
+  color: #1a56db;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.swap-icon:hover {
+  transform: rotate(180deg);
+}
+
+.submit-group {
+  flex: 0 0 150px;
+}
+
+.btn-search {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: 47px;
+}
+
+.btn-search:hover {
+  background-color: #b71c1c;
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .icon-group {
+    padding: 0;
+    margin: 5px 0;
+  }
+
+  .swap-icon {
+    transform: rotate(90deg);
+  }
+
+  .swap-icon:hover {
+    transform: rotate(270deg);
+  }
+
+  .submit-group {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .btn-search {
+    width: 100%;
+  }
+}
