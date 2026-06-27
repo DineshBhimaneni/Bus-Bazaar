@@ -14,12 +14,12 @@ const Register = () => {
     e.preventDefault();
     setError('');
     
-    // MOCK REGISTER
-    if (name && email && password) {
-      alert('Mock Registration Successful');
+    try {
+      await api.post('/auth/register', { name, email, password });
+      alert('Registration Successful! Please login.');
       navigate('/login');
-    } else {
-      setError('Please fill all fields');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Something went wrong during registration');
     }
   };
 

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import api from '../services/api';
+import Toast from '../components/Toast';
 import './BookingSummary.css';
 
 const BookingSummary = () => {
@@ -8,6 +10,9 @@ const BookingSummary = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   
+  const [toast, setToast] = useState(null);
+  const showToast = (message, type = 'success') => setToast({ message, type });
+
   const [passengerDetails, setPassengerDetails] = useState({
     name: user ? user.name : '',
     age: '',
@@ -28,21 +33,36 @@ const BookingSummary = () => {
     setPassengerDetails({ ...passengerDetails, [name]: value });
   };
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
     if (!user) {
-      alert('Please login to continue booking');
       navigate('/login');
       return;
     }
     
-    // MOCK PAYMENT AND BOOKING
-    alert('Payment Successful! Booking Confirmed.');
-    navigate('/profile');
+    try {
+      await api.post('/bookings', {
+        bus_id: bus.busId || bus.id,
+        route_id: bus.id,
+        seat_numbers: selectedSeats.join(','),
+        passenger_name: passengerDetails.name,
+        passenger_age: passengerDetails.age,
+        passenger_gender: passengerDetails.gender,
+        passenger_email: passengerDetails.email,
+        passenger_phone: passengerDetails.phone,
+        total_fare: totalFare
+      });
+      showToast('Booking Confirmed! Redirecting to your profile...');
+      setTimeout(() => navigate('/profile'), 1800);
+    } catch (error) {
+      console.error('Failed to create booking', error);
+      showToast('Booking failed. Please try again.', 'error');
+    }
   };
 
   return (
     <div className="booking-summary-page container">
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <h2 className="page-title">Booking Summary</h2>
       
       <div className="summary-layout">

@@ -36,9 +36,15 @@ const createUser = async (name, email, hashedPassword) => {
   return result.insertId;
 };
 
+const getAllUsers = async () => {
+  const [rows] = await db.query('SELECT id, name, email, created_at FROM users ORDER BY created_at DESC');
+  return rows;
+};
+
 module.exports = {
   createUsersTable,
   findUserByEmail,
   findUserById,
-  createUser
+  createUser,
+  getAllUsers
 };

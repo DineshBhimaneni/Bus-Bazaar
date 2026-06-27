@@ -12,11 +12,17 @@ app.use(express.json());
 
 // Initialize database tables
 const User = require('./models/User');
+const Bus = require('./models/Bus');
+const Booking = require('./models/Booking');
 User.createUsersTable();
+Bus.createBusTables();
+Booking.createBookingsTable();
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/buses', require('./routes/busRoutes'));
+app.use('/api/bookings', require('./routes/bookingRoutes'));
 
 // Basic Route
 app.get('/', (req, res) => {

@@ -1,16 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { mockBuses } from '../data/mockData';
 import SeatMap from '../components/SeatMap';
+import api from '../services/api';
 import './BusDetails.css';
 
 const BusDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bus, setBus] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Find mock bus
-  const bus = mockBuses.find(b => b.id === parseInt(id));
+  useEffect(() => {
+    const fetchBusDetails = async () => {
+      try {
+        const response = await api.get(`/buses/${id}`);
+        // Map the backend data to match the expected structure in the component
+        const busData = response.data;
+        setBus({
+          id: busData.route_id,
+          operator: busData.bus_name,
+          type: busData.bus_type,
+          departureTime: busData.departure_time,
+          arrivalTime: busData.arrival_time,
+          duration: 'N/A', // You can calculate this if needed
+          price: busData.fare,
+          from: busData.source,
+          to: busData.destination,
+          busId: busData.bus_id
+        });
+      } catch (error) {
+        console.error('Failed to fetch bus details', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBusDetails();
+  }, [id]);
+
+  if (loading) {
+    return <div className="container" style={{padding: '50px', textAlign: 'center'}}>Loading bus details...</div>;
+  }
 
   if (!bus) {
     return <div className="container" style={{padding: '50px', textAlign: 'center'}}>Bus not found</div>;
@@ -79,7 +109,7 @@ const BusDetails = () => {
 
         <div className="seat-selection-section card">
           <h3>Select Seats</h3>
-          <SeatMap selectedSeats={selectedSeats} onSeatSelect={handleSeatSelect} />
+          <SeatMap selectedSeats={selectedSeats} onSeatSelect={handleSeatSelect} routeId={bus.id} />
           
           {selectedSeats.length > 0 && (
             <div className="selection-summary">

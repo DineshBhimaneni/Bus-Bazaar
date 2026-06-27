@@ -14,21 +14,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    // For now, mock login since backend might not be connected
-    // try {
-    //   const res = await api.post('/auth/login', { email, password });
-    //   login(res.data, res.data.token);
-    //   navigate('/');
-    // } catch (err) {
-    //   setError(err.response?.data?.message || 'Something went wrong during login');
-    // }
     
-    // MOCK LOGIN
-    if (email && password) {
-      login({ id: 1, name: 'Test User', email }, 'dummy-token');
+    try {
+      const res = await api.post('/auth/login', { email, password });
+      login(res.data, res.data.token);
       navigate('/');
-    } else {
-      setError('Please enter valid credentials');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Something went wrong during login');
     }
   };
 

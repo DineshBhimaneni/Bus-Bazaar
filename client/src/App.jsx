@@ -11,6 +11,7 @@ import BusDetails from './pages/BusDetails';
 import BookingSummary from './pages/BookingSummary';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -24,9 +25,21 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/bus/:id" element={<BusDetails />} />
-            <Route path="/booking" element={<BookingSummary />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/booking" element={
+              <ProtectedRoute>
+                <BookingSummary />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin" element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
           </Routes>
         </div>
         <Footer />

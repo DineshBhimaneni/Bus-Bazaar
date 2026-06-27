@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { mockLocations } from '../data/mockData';
 import './SearchForm.css';
+
+const LOCATIONS = ['Hyderabad', 'Vijayawada', 'Vizag', 'Tirupati', 'Kurnool', 'Rajahmundry'];
 
 const SearchForm = () => {
   const [source, setSource] = useState('');
@@ -29,12 +30,13 @@ const SearchForm = () => {
           <form className="search-form" onSubmit={handleSearch}>
             <div className="input-group">
               <label>From</label>
-              <select value={source} onChange={(e) => setSource(e.target.value)} required>
-                <option value="">Select Source</option>
-                {mockLocations.map(loc => (
-                  <option key={loc} value={loc}>{loc}</option>
-                ))}
-              </select>
+              <input 
+                type="text" 
+                value={source} 
+                onChange={(e) => setSource(e.target.value)} 
+                placeholder="Enter Boarding Point" 
+                required 
+              />
             </div>
             
             <div className="input-group icon-group">
@@ -43,12 +45,13 @@ const SearchForm = () => {
 
             <div className="input-group">
               <label>To</label>
-              <select value={destination} onChange={(e) => setDestination(e.target.value)} required>
-                <option value="">Select Destination</option>
-                {mockLocations.map(loc => (
-                  <option key={loc} value={loc}>{loc}</option>
-                ))}
-              </select>
+              <input 
+                type="text" 
+                value={destination} 
+                onChange={(e) => setDestination(e.target.value)} 
+                placeholder="Enter Dropping Point" 
+                required 
+              />
             </div>
 
             <div className="input-group">

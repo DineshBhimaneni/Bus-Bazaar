@@ -23,7 +23,7 @@ const Navbar = () => {
           {user ? (
             <>
               <Link to="/profile" className="nav-link">Profile</Link>
-              {user.email === 'admin@apsrtc.com' && (
+              {(user.email === 'admin@apsrtc.com' || user.email === 'dineshbhimaneni007@gmail.com') && (
                 <Link to="/admin" className="nav-link">Dashboard</Link>
               )}
               <span className="welcome-text">Hi, {user.name}</span>
